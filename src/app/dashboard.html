@@ -1,0 +1,175 @@
+<div class="container mt-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3>Welcome {{ loggedInUser.username }}</h3>
+    <button hidden class="cobrowse-btn" type="button" (click)="handleLogout()">
+      Logout
+    </button>
+    <img src="assets/adib-logo.webp" alt="ADIB Logo" class="dashboard-logo" />
+  </div>
+
+  <!-- Request Support -->
+  <div class="cobrowse-wrapper mb-4">
+    <button class="cobrowse-btn" (click)="startCobrowse()">Request Support</button>
+    <input *ngIf="showCobrowse"
+           type="text"
+           class="cobrowse-input"
+           [(ngModel)]="cobrowseCode"
+           [ngModelOptions]="{ standalone: true }"
+           readonly />
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs mb-4">
+    <button class="tab-btn"
+            [class.active]="activeTab === 'pending'"
+            (click)="activeTab = 'pending'">
+      Pending Tasks ({{ pendingTasks.length }})
+    </button>
+    <button class="tab-btn"
+            [class.active]="activeTab === 'completed'"
+            (click)="activeTab = 'completed'">
+      Completed Tasks ({{ completedTasks.length }})
+    </button>
+  </div>
+
+  <!-- Task Cards -->
+  <div class="row mb-4">
+    <div class="col-md-3 mb-3"
+         *ngFor="let task of activeTab === 'pending' ? pendingTasks : completedTasks">
+      <div class="card h-100 border-primary"
+           (click)="handleCardClick(task.name)">
+        <div class="card-body">
+          <p class="task-title">{{ task.name }}</p>
+          <span *ngIf="task.completed"
+                class="badge completed-badge">
+            Completed
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Completed Task Details -->
+  <div *ngIf="completedTaskViewData && activeTab === 'completed'"
+       class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Completed Task Details</h5>
+    </div>
+
+    <div class="card-body">
+      <div *ngFor="let item of completedTaskViewData | keyvalue"
+           class="mb-3">
+        <label class="form-label">{{ item.key }}</label>
+        <input type="text"
+               class="form-control"
+               [value]="item.value"
+               readonly />
+      </div>
+
+      <button type="button"
+              class="btn btn-secondary"
+              (click)="completedTaskViewData = null">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Task Form (Pending Tasks Only) -->
+  <div *ngIf="selectedTask" class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">{{ selectedTask }}</h5>
+    </div>
+
+    <div class="card-body">
+      <form (ngSubmit)="handleSubmit()">
+
+        <div class="mb-3">
+          <label class="form-label">User Name</label>
+          <input class="form-control"
+                 [value]="loggedInUser.username"
+                 readonly />
+        </div>
+
+        <!-- Static Detail Tasks -->
+        <div *ngIf="isStaticDetailTask">
+          <div *ngFor="let key of staticTaskData | keyvalue"
+               class="mb-2">
+            <label class="form-label">{{ key.key }}</label>
+            <input type="text"
+                   class="form-control"
+                   [value]="key.value"
+                   readonly />
+          </div>
+        </div>
+
+        <!-- EIDA Task -->
+        <div *ngIf="isVisaTask">
+          <div class="mb-3">
+            <label class="form-label">{{ currentLabel }}</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Expiry Date</label>
+            <input type="date" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Application Task -->
+        <div *ngIf="isApplicationTask">
+          <label class="form-label">{{ currentLabel }}</label>
+          <select class="form-select"
+                  [(ngModel)]="selectedApplication"
+                  name="selectedApplication"
+                  required>
+            <option value="" disabled
+                    [selected]="!selectedApplication">
+              Select an option
+            </option>
+            <option value="Account Onboarding">Account Onboarding</option>
+            <option value="PF">PF</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="HF">HF</option>
+          </select>
+        </div>
+
+        <!-- File Upload Task -->
+        <div *ngIf="isFileUploadTask" class="mb-3">
+          <label class="form-label">{{ currentLabel }}</label>
+          <input type="file"
+                 class="form-control"
+                 (change)="handleFileChange($event)"
+                 required />
+          <div *ngIf="uploadedFile" class="mt-2">
+            Selected file: {{ uploadedFile.name }}
+          </div>
+        </div>
+
+        <!-- Signature Canvas -->
+        <div *ngIf="isSignatureTask"
+             class="signature-box mb-3">
+          <canvas #signatureCanvas
+                  (pointerdown)="onPointerDown($event)"
+                  (pointermove)="onPointerMove($event)"
+                  (pointerup)="onPointerUp($event)"
+                  (pointerleave)="onPointerUp($event)"
+                  style="width:600px;height:200px;touch-action:none;">
+          </canvas>
+        </div>
+
+        <button type="submit"
+                class="btn btn-success mt-3">
+          Save Task
+        </button>
+        <button type="button"
+                class="btn btn-secondary ms-2 mt-3"
+                (click)="selectedTask = null">
+          Cancel
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+</div>

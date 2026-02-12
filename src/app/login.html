@@ -1,0 +1,66 @@
+<div class="adib-wrapper">
+  <div class="adib-card">
+    <h1 class="adib-title">Login to ADIB Banking Portal</h1>
+
+    <form (ngSubmit)="handleSubmit()" novalidate autocomplete="off">
+
+      <!-- Username -->
+      <label class="adib-label" for="username">Username</label>
+      <div class="adib-input-row">
+        <input id="username"
+               type="text"
+               class="adib-input"
+               placeholder="Enter username"
+               [(ngModel)]="email"
+               name="email" />
+      </div>
+
+      <div class="adib-inline-link">
+        <a href="#">Forgot username?</a>
+      </div>
+
+      <!-- Password -->
+      <label class="adib-label" for="password">Password</label>
+      <div class="adib-input-row">
+        <input id="password"
+               type="password"
+               class="adib-input"
+               placeholder="Enter password"
+               [(ngModel)]="password"
+               name="password" />
+      </div>
+
+      <div class="adib-inline-link">
+        <a href="#">Forgot password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit"
+              class="adib-btn"
+              [disabled]="loading">
+        {{ loading ? 'Logging in…' : 'Login' }}
+      </button>
+
+      <!-- Error Message -->
+      <div *ngIf="message" class="adib-alert">
+        {{ message }}
+      </div>
+
+      <!-- Sign up -->
+      <p class="adib-signup">
+        Not registered yet?
+        <a href="#" class="adib-signup-link">Sign up</a>
+      </p>
+
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer class="adib-footer">
+    <a href="#" class="footer-link left">Report fraud</a>
+    <a href="https://www.adib.ae" target="_blank" class="footer-link center">
+      www.adib.ae
+    </a>
+    <a href="#" class="footer-link right">Terms and conditions</a>
+  </footer>
+</div>

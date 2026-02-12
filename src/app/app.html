@@ -1,0 +1,5 @@
+<app-login *ngIf="!isLoggedIn"
+           (loginSuccess)="onLoginSuccess()"></app-login>
+
+<app-dashboard *ngIf="isLoggedIn"
+               (logout)="onLogout()"></app-dashboard>

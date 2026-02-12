@@ -1,0 +1,214 @@
+:root {
+  --adib-blue: #0a66c2; /* link & button color */
+  --adib-text: #1b2b3a; /* dark text color */
+  --adib-muted: #5a6a79; /* label color */
+  --adib-bg: #f2f4f7; /* page background */
+  --adib-card-bg: #ffffff; /* card background */
+  --adib-field-bg: #f5f7fa; /* input background */
+  --adib-field-border: #dce3eb; /* input border */
+  --adib-btn-bg: #0a66c2; /* login button */
+  --adib-btn-hover: #084f9e; /* hover */
+  --adib-card-max: 600px; /* max width of card */
+  --adib-form-width: 540px; /* form width */
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Wrapper */
+.adib-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  align-items: center; /* horizontal center */
+  background: var(--adib-bg);
+  padding: 40px 24px;
+  color: var(--adib-text);
+}
+
+/* Card */
+.adib-card {
+  width: 100%;
+  max-width: var(--adib-card-max);
+  background: var(--adib-card-bg);
+  border-radius: 16px;
+  padding: 40px 32px 60px 32px; /* extra bottom padding to show login button */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left align content */
+  overflow: visible; /* ensures button is visible */
+}
+
+/* Title */
+.adib-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: var(--adib-text);
+  text-align: left;
+}
+
+/* Form */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Labels */
+.adib-label {
+  display: block;
+  margin: 16px 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--adib-muted); /* gray label */
+  width: var(--adib-form-width);
+}
+
+/* Input rows */
+.adib-input-row {
+  width: var(--adib-form-width);
+  margin-bottom: 4px;
+}
+
+/* Inputs */
+.adib-input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid var(--adib-field-border);
+  border-radius: 4px;
+  background: var(--adib-field-bg);
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--adib-text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+  .adib-input::placeholder {
+    color: #98a7b5;
+  }
+
+  .adib-input:focus {
+    border-color: var(--adib-blue);
+    box-shadow: 0 0 0 3px rgba(10,102,194,0.08);
+  }
+
+/* Forgot username/password links */
+.adib-inline-link {
+  width: var(--adib-form-width);
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+  .adib-inline-link a {
+    color: var(--adib-blue) !important; /* force blue like ADIB site */
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+    .adib-inline-link a:hover {
+      text-decoration: underline !important;
+    }
+
+/* Login button */
+.adib-btn {
+  width: 100px;
+  height: 48px;
+  border-radius: 4px;
+  border: none;
+  background: #003978;
+  color: #f2f4f7;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 24px;
+  display: block; /* ensures button is visible */
+  transition: background 0.2s ease;
+}
+
+  .adib-btn:hover {
+    background: var(--adib-btn-hover);
+  }
+
+  .adib-btn:disabled {
+    background: #e8eef3;
+    color: #0a66c2;
+    cursor: pointer;
+  }
+
+/* Error message */
+.adib-alert {
+  width: var(--adib-form-width);
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 4px;
+  background: #ffeeee;
+  color: #8a1f1f;
+  border: 1px solid #f3c2c2;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* Signup text */
+.adib-signup {
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--adib-text);
+  text-align: left;
+}
+
+.adib-signup-link {
+  color: var(--adib-blue) !important;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+  .adib-signup-link:hover {
+    text-decoration: underline !important;
+  }
+
+/* Footer */
+.adib-footer {
+  width: 100%;
+  max-width: var(--adib-card-max);
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.footer-link {
+  color: var(--adib-blue) !important; /* ensure blue */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+  .footer-link:hover {
+    text-decoration: underline !important;
+  }
+
+/* Responsive */
+@media (max-width: 560px) {
+  :root {
+    --adib-form-width: 100%;
+  }
+
+  .adib-title {
+    font-size: 24px;
+  }
+
+  .adib-btn {
+    height: 48px;
+  }
+}
