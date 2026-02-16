@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
-    "build": "ng build",
+    "start": "node server.js",
+    "build": "npm install && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -31,6 +31,7 @@
     "@angular/router": "^21.1.0",
     "bootstrap": "^5.3.8",
     "cobrowse-sdk-js": "^3.18.0",
+    "express": "^5.2.1",
     "ngx-signaturepad": "^0.0.10",
     "rxjs": "~7.8.0",
     "signature_pad": "^5.1.3",

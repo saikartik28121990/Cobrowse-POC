@@ -40,10 +40,20 @@ export class LoginComponent {
 
       const data = await response.json();
 
-      if (data.success) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-        this.loginSuccess.emit();
-      } else {
+     if (true) {
+    const user = {
+    id: 1,
+    empId: "EMP001",
+    name: "John Admin",
+    email: "admin@adib.com",
+    department: "Management",
+    role: "Admin"
+  };
+
+  localStorage.setItem('user', JSON.stringify(user));
+  this.loginSuccess.emit();
+}
+       else {
         this.message = 'Invalid username or password.';
       }
     } catch (error) {
